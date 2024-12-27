@@ -1,0 +1,1431 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Fresh Prime - Orden de compra COR</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            background-color: #f4f4f4; 
+            margin: 0; 
+            padding: 20px;
+        }
+        .letterhead {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #333;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        .letterhead img {
+            max-width: 200px; /* Adjust width of the logo */
+        }
+        .letterhead h2 {
+            margin: 0;
+            color: #4CAF50;
+            text-align: center;
+            width: 100%;
+        }
+        .letterhead address {
+            font-size: 14px;
+            color: #333;
+            text-align: right;
+        }
+        h1 { 
+            text-align: center; 
+            color: #333; 
+            margin-bottom: 20px;
+        }
+        table { 
+            width: 90%; 
+            margin: 20px auto; 
+            border-collapse: collapse; 
+            background-color: #fff;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+        }
+        th, td {
+            padding: 12px 20px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+        tr:hover { background-color: #f1f1f1; }
+        .button {
+            text-align: center;
+            padding: 20px;
+        }
+        .buy-button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        .buy-button:hover {
+            background-color: #45a049;
+        }
+        .print-button {
+            padding: 10px 20px;
+            background-color: #f44336;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .print-button:hover {
+            background-color: #d32f2f;
+        }
+
+        /* Ensure green bar shows in print */
+        @media print {
+            th {
+                background-color: #4CAF50 !important;
+                color: white;
+            }
+        }
+
+        /* Footer styling */
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #333;
+            color: white;
+            margin-top: 40px;
+        }
+
+        .total-section {
+            text-align: right;
+            font-weight: bold;
+            font-size: 18px;
+            margin-right: 10%;
+            margin-top: 20px;
+        }
+        
+        /* Resumen section styling */
+        .resumen {
+            margin-top: 40px;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        .resumen h2 {
+            text-align: center;
+            color: #4CAF50;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Letterhead section -->
+    <div class="letterhead">
+        <img src="https://i.imgur.com/5adH4YT.png" alt="Pollo Directo Logo"> <!-- Logo Placeholder -->
+        <h2>FRESH PRIME - GESTIÓN DE FRESCURA, SOLUCIONES A MEDIDA.</h2>
+        <address>
+            Grupo Directo S.A. de C.V.<br>
+            Paseo de Varsovia #202, Querétaro, Mexico<br>
+            Tel: +52 442 422 5756<br>
+            Email: FreshPrimeGroup@outlook.com
+        </address>
+    </div>
+
+    <!-- Catalog Title -->
+    <h1>ORDEN DE COMPRA</h1>
+    <h1>CLIENTE 1</h1>
+
+
+    <!-- Filter Section -->
+<div class="filter-section">
+    <label for="class-filter">Filter by Group: </label>
+    <select id="class-filter" onchange="filterTable()">
+        <option value="All">All Groups</option>
+        <option value="A">Abarrotes</option>
+        <option value="B">Aderezos</option>
+        <option value="C">Carnes Frias</option>
+        <option value="D">Chiles, semillas y especies</option>
+        <option value="E">Especiales</option>
+        <option value="F">Frutas</option>
+        <option value="G">Lacteos</option>
+        <option value="K">Proteinas</option>
+        <option value="M">Verduras</option>
+        <option value="Resumen">Resumen</option> 
+    </select>
+</div>
+
+
+    <!-- Product Table with Classifications -->
+    <table id="product-table">
+        <thead>
+            <tr>
+                <th>Grupo</th>
+                <th>Producto</th>
+                <th>Unidad</th>
+                <th>Cantidad</th>
+                <th>Precio</th>
+                <th>Total</th> <!-- Nueva columna para el total -->
+		<th>Notas</th>
+            </tr>
+        </thead>
+        <tbody>
+
+
+            <tr data-class='M'>
+<td>VERDURAS</td>
+<td>ACELGA KG</td>
+<td>KGM</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$15.00</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='F'>
+<td>FRUTAS</td>
+<td>ACITRON KG</td>
+<td>KGM</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$279.00</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='M'>
+<td>VERDURAS</td>
+<td>AGUACATE</td>
+<td>KGM</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$112.00</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='M'>
+<td>VERDURAS</td>
+<td>AJO A GRANEL</td>
+<td>KGM</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$230.00</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='M'>
+<td>VERDURAS</td>
+<td>AJO PELADO MR LUCKY</td>
+<td>PIEZA</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$123.00</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='M'>
+<td>VERDURAS</td>
+<td>ALBAHACA KG</td>
+<td>KGM</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$63.00</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='M'>
+<td>VERDURAS</td>
+<td>APIO</td>
+<td>PIEZA</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$37.00</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='M'>
+<td>VERDURAS</td>
+<td>ARUGULA</td>
+<td>KGM</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$339.00</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='M'>
+<td>VERDURAS</td>
+<td>ARUGULA DOMO 250GR</td>
+<td>PIEZA</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$93.00</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='M'>
+<td>VERDURAS</td>
+<td>BERENJENA</td>
+<td>KGM</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$72.00</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='M'>
+<td>VERDURAS</td>
+<td>BETABEL KG</td>
+<td>KGM</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$88.00</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='F'>
+<td>FRUTAS</td>
+<td>BLUEBERRY DOMO</td>
+<td>PIEZA</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$97.00</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='M'>
+<td>VERDURAS</td>
+<td>BROCOLI</td>
+<td>KGM</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$43.00</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='M'>
+<td>VERDURAS</td>
+<td>BROTE BETABEL</td>
+<td>PIEZA</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$88.00</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='M'>
+<td>VERDURAS</td>
+<td>BROTE CHICHARO</td>
+<td>PIEZA</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$87.00</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='M'>
+<td>VERDURAS</td>
+<td>BROTE CILANTRO</td>
+<td>PIEZA</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$88.00</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='M'>
+<td>VERDURAS</td>
+<td>BULBO DE HINOJO</td>
+<td>PIEZA</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$225.00</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='M'>
+<td>VERDURAS</td>
+<td>CALABAZA</td>
+<td>KGM</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$57.20</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='F'>
+<td>FRUTAS</td>
+<td>CARAMBOLA</td>
+<td>KGM</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$72.00</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='M'>
+<td>VERDURAS</td>
+<td>CEBOLLA BLANCA GRANDE</td>
+<td>KGM</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$33.00</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='M'>
+<td>VERDURAS</td>
+<td>CEBOLLA CAMBRAY KG</td>
+<td>KGM</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$84.00</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='M'>
+<td>VERDURAS</td>
+<td>CEBOLLA MORADA</td>
+<td>KGM</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$69.00</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='M'>
+<td>VERDURAS</td>
+<td>CEBOLLIN KG</td>
+<td>KGM</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$650.00</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='F'>
+<td>FRUTAS</td>
+<td>CEREZA</td>
+<td>KGM</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$149.00</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='M'>
+<td>VERDURAS</td>
+<td>CHAMPIÑON KG</td>
+<td>KGM</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$116.00</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='M'>
+<td>VERDURAS</td>
+<td>CHAMPIÑON REBANADO MONTE BLANCO 2.835KG</td>
+<td>KGM</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$227.00</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='M'>
+<td>VERDURAS</td>
+<td>CHAYOTE</td>
+<td>KGM</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$46.00</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='M'>
+<td>VERDURAS</td>
+<td>CHICHARO</td>
+<td>PIEZA</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$51.00</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='M'>
+<td>VERDURAS</td>
+<td>CHILE HABANERO</td>
+<td>KGM</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$169.00</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='M'>
+<td>VERDURAS</td>
+<td>CHILE JALAPEÑO</td>
+<td>KGM</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$41.00</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='M'>
+<td>VERDURAS</td>
+<td>CHILE POBLANO</td>
+<td>KGM</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$35.88</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='M'>
+<td>VERDURAS</td>
+<td>CHILE SERRANO</td>
+<td>KGM</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$39.27</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='M'>
+<td>VERDURAS</td>
+<td>CILANTRO MANOJO KG</td>
+<td>KGM</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$56.00</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='F'>
+<td>FRUTAS</td>
+<td>CIRUELA</td>
+<td>KGM</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$120.00</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='M'>
+<td>VERDURAS</td>
+<td>COL BLANCA</td>
+<td>PIEZA</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$45.00</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='M'>
+<td>VERDURAS</td>
+<td>COL DE BRUSELAS</td>
+<td>KGM</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$75.00</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='M'>
+<td>VERDURAS</td>
+<td>COL MORADA</td>
+<td>PIEZA</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$60.00</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='M'>
+<td>VERDURAS</td>
+<td>COLIFLOR PZA</td>
+<td>PIEZA</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$49.00</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='M'>
+<td>VERDURAS</td>
+<td>DAIKON NABO</td>
+<td>PIEZA</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$60.00</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='M'>
+<td>VERDURAS</td>
+<td>DOMO COGOLLOS DE LECHUGA (LECHUGA BABY)</td>
+<td>PIEZA</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$77.00</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='M'>
+<td>VERDURAS</td>
+<td>DOMO ESPINACA BABY</td>
+<td>KGM</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$149.00</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='F'>
+<td>FRUTAS</td>
+<td>DURAZNO</td>
+<td>KGM</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$85.00</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='F'>
+<td>FRUTAS</td>
+<td>DURAZNO CRIOLLO</td>
+<td>KGM</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$50.00</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='M'>
+<td>VERDURAS</td>
+<td>EJOTE</td>
+<td>KGM</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$85.00</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='M'>
+<td>VERDURAS</td>
+<td>ELOTE DESGRANADO NATURAL KG</td>
+<td>KGM</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$78.00</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='M'>
+<td>VERDURAS</td>
+<td>ELOTE PZA</td>
+<td>PIEZA</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$10.00</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='M'>
+<td>VERDURAS</td>
+<td>EPAZOTE MANOJO KG</td>
+<td>KGM</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$45.00</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='M'>
+<td>VERDURAS</td>
+<td>ESPARRAGOS</td>
+<td>KGM</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$250.00</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='M'>
+<td>VERDURAS</td>
+<td>ESPINACA MANOJO KG</td>
+<td>KGM</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$94.00</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='M'>
+<td>VERDURAS</td>
+<td>FLOR DE CALABAZA</td>
+<td>KGM</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$150.00</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='F'>
+<td>FRUTAS</td>
+<td>FRAMBUESA DOMO</td>
+<td>PIEZA</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$49.00</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='F'>
+<td>FRUTAS</td>
+<td>FRESA A GRANEL KG</td>
+<td>KGM</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$95.00</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='F'>
+<td>FRUTAS</td>
+<td>FRESA DOMO 454GR</td>
+<td>PIEZA</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$98.00</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='M'>
+<td>VERDURAS</td>
+<td>GENGIBRE</td>
+<td>KGM</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$65.00</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='M'>
+<td>VERDURAS</td>
+<td>GERMEN DE ALFALFA</td>
+<td>KGM</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$68.00</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='M'>
+<td>VERDURAS</td>
+<td>GERMEN DE SOYA</td>
+<td>KGM</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$113.00</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='F'>
+<td>FRUTAS</td>
+<td>GRANADA KG</td>
+<td>KGM</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$79.00</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='F'>
+<td>FRUTAS</td>
+<td>GUAYABA</td>
+<td>KGM</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$45.00</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='M'>
+<td>VERDURAS</td>
+<td>HIERBABUENA MANOJO KG</td>
+<td>KGM</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$32.00</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='M'>
+<td>VERDURAS</td>
+<td>HOJA DE HINOJO</td>
+<td>KGM</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$37.00</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='F'>
+<td>FRUTAS</td>
+<td>JICAMA</td>
+<td>KGM</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$38.00</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='M'>
+<td>VERDURAS</td>
+<td>JITOMATE BOLA GRANDE</td>
+<td>KGM</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$54.00</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='M'>
+<td>VERDURAS</td>
+<td>JITOMATE BOLA JUMBO 2.8 KG</td>
+<td>KGM</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$152.00</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='M'>
+<td>VERDURAS</td>
+<td>JITOMATE CHERRY A GRANEL</td>
+<td>KGM</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$44.00</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='M'>
+<td>VERDURAS</td>
+<td>JITOMATE SALADET PRIMERA</td>
+<td>KGM</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$53.00</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='M'>
+<td>VERDURAS</td>
+<td>JITOMATE SALADET SEGUNDA</td>
+<td>KGM</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$44.00</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='F'>
+<td>FRUTAS</td>
+<td>KIWI</td>
+<td>KGM</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$143.00</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='M'>
+<td>VERDURAS</td>
+<td>LECHUGA ITALIANA</td>
+<td>PIEZA</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$28.00</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='M'>
+<td>VERDURAS</td>
+<td>LECHUGA OREJONA</td>
+<td>PIEZA</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$28.00</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='M'>
+<td>VERDURAS</td>
+<td>LECHUGA ROMANA</td>
+<td>PIEZA</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$28.00</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='M'>
+<td>VERDURAS</td>
+<td>LECHUGA SANGRIA</td>
+<td>PIEZA</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$28.00</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='M'>
+<td>VERDURAS</td>
+<td>LIMON CON SEMILLA</td>
+<td>KGM</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$25.00</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='M'>
+<td>VERDURAS</td>
+<td>LIMON EUREKA</td>
+<td>KGM</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$90.00</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='M'>
+<td>VERDURAS</td>
+<td>LIMON SIN SEMILLA</td>
+<td>KGM</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$55.00</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='F'>
+<td>FRUTAS</td>
+<td>MAMEY</td>
+<td>KGM</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$107.00</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='F'>
+<td>FRUTAS</td>
+<td>MANDARINA</td>
+<td>KGM</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$36.00</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='F'>
+<td>FRUTAS</td>
+<td>MANGO ATAULFO</td>
+<td>KGM</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$64.00</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='F'>
+<td>FRUTAS</td>
+<td>MANGO PETACON HEIDI</td>
+<td>KGM</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$53.00</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='F'>
+<td>FRUTAS</td>
+<td>MANZANA GALA NACIONAL</td>
+<td>KGM</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$54.00</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='F'>
+<td>FRUTAS</td>
+<td>MANZANA GOLDEN NACIONAL</td>
+<td>KGM</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$50.00</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='F'>
+<td>FRUTAS</td>
+<td>MANZANA GRANNY NACIONAL</td>
+<td>KGM</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$54.00</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='F'>
+<td>FRUTAS</td>
+<td>MANZANA ROJA NACIONAL</td>
+<td>KGM</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$63.00</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='F'>
+<td>FRUTAS</td>
+<td>MANZANA STARKING</td>
+<td>KGM</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$63.00</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='F'>
+<td>FRUTAS</td>
+<td>MELON CHINO</td>
+<td>KGM</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$55.00</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='F'>
+<td>FRUTAS</td>
+<td>MELON VALENCIANO</td>
+<td>KGM</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$56.00</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='M'>
+<td>VERDURAS</td>
+<td>MENTA MANOJO KG</td>
+<td>PIEZA</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$150.00</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='F'>
+<td>FRUTAS</td>
+<td>NARANJA</td>
+<td>KGM</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$43.00</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='M'>
+<td>VERDURAS</td>
+<td>NOPAL LIMPIO</td>
+<td>KGM</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$55.00</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='M'>
+<td>VERDURAS</td>
+<td>PAPA ALPHA KG</td>
+<td>KGM</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$44.00</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='M'>
+<td>VERDURAS</td>
+<td>PAPA BLANCA ARPILLA 4.5 KG</td>
+<td>KGM</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$203.00</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='M'>
+<td>VERDURAS</td>
+<td>PAPA CAMBRAY</td>
+<td>KGM</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$44.00</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='M'>
+<td>VERDURAS</td>
+<td>PAPALO MANOJO KG</td>
+<td>KGM</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$100.00</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='F'>
+<td>FRUTAS</td>
+<td>PAPAYA</td>
+<td>KGM</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$64.00</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='M'>
+<td>VERDURAS</td>
+<td>PEPINO</td>
+<td>KGM</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$63.00</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='F'>
+<td>FRUTAS</td>
+<td>PERA</td>
+<td>KGM</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$93.00</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='F'>
+<td>FRUTAS</td>
+<td>PERA CRIOLLO</td>
+<td>KGM</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$45.00</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='M'>
+<td>VERDURAS</td>
+<td>PEREJIL CHINO MANOJO KG</td>
+<td>KGM</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$205.00</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='M'>
+<td>VERDURAS</td>
+<td>PEREJIL MANOJO KG</td>
+<td>KGM</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$53.00</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='M'>
+<td>VERDURAS</td>
+<td>PIMIENTOS MORRON</td>
+<td>KGM</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$65.00</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='F'>
+<td>FRUTAS</td>
+<td>PIÑA KG</td>
+<td>KGM</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$75.00</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='F'>
+<td>FRUTAS</td>
+<td>PLATANO MACHO</td>
+<td>KGM</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$48.00</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='F'>
+<td>FRUTAS</td>
+<td>PLATANO TABASCO</td>
+<td>KGM</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$34.00</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='M'>
+<td>VERDURAS</td>
+<td>PORO</td>
+<td>PIEZA</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$39.00</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='M'>
+<td>VERDURAS</td>
+<td>PORTOBELLO KG</td>
+<td>KGM</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$250.00</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='F'>
+<td>FRUTAS</td>
+<td>PULPA DE MARACUYA</td>
+<td>KGM</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$239.00</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='M'>
+<td>VERDURAS</td>
+<td>RABANO</td>
+<td>KGM</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$55.00</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='M'>
+<td>VERDURAS</td>
+<td>ROMERO KG</td>
+<td>KGM</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$66.00</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='F'>
+<td>FRUTAS</td>
+<td>SANDIA</td>
+<td>KGM</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$53.00</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='M'>
+<td>VERDURAS</td>
+<td>SETAS</td>
+<td>KGM</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$31.00</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='F'>
+<td>FRUTAS</td>
+<td>TAMARINDO</td>
+<td>KGM</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$68.00</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='M'>
+<td>VERDURAS</td>
+<td>TOMATE PELADO</td>
+<td>KGM</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$40.00</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='M'>
+<td>VERDURAS</td>
+<td>TOMATE SIN PELAR</td>
+<td>KGM</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$30.00</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='F'>
+<td>FRUTAS</td>
+<td>TORONJA</td>
+<td>KGM</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$68.00</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='M'>
+<td>VERDURAS</td>
+<td>TUNA MORADA PRIMERA</td>
+<td>KGM</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$23.00</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='M'>
+<td>VERDURAS</td>
+<td>TUNA VERDE PRIMERA</td>
+<td>KGM</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$37.00</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='F'>
+<td>FRUTAS</td>
+<td>TURRON 150GR</td>
+<td>KGM</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$130.00</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='F'>
+<td>FRUTAS</td>
+<td>UVA ROJA</td>
+<td>KGM</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$158.00</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='F'>
+<td>FRUTAS</td>
+<td>UVA VERDE S/S</td>
+<td>KGM</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$150.00</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='M'>
+<td>VERDURAS</td>
+<td>VERDOLAGAS</td>
+<td>KGM</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$50.00</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='F'>
+<td>FRUTAS</td>
+<td>XOCONOSTLE</td>
+<td>KGM</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$49.00</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='M'>
+<td>VERDURAS</td>
+<td>ZANAHORIA</td>
+<td>KGM</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$23.00</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='M'>
+<td>VERDURAS</td>
+<td>ZANAHORIA DE COLORES</td>
+<td>KGM</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$300.00</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+<tr data-class='F'>
+<td>FRUTAS</td>
+<td>ZARZAMORA DOMO</td>
+<td>PIEZA</td>
+<td><input type='number' value='0' onchange='updateTotal()'></td>
+<td class='price'>$65.00</td>
+<td class='item-total'>$0</td> <!-- Nueva columna de total por producto -->
+<td><input type='text' placeholder='Ingrese notas aquí'></td> <!-- Notes input -->
+</tr>
+
+
+
+
+        </tbody>
+    </table>
+
+    <!-- Total Section -->
+    <div class="total-section" id="total-section">
+        Total: $<span id="total-amount">0</span>
+    </div>
+
+
+
+
+
+    <!-- Resumen Section -->
+    <div class="resumen">
+        <h2>Resumen de compra</h2>
+        <table id="resumen-table">
+            <thead>
+                <tr>
+                    <th>Producto</th>
+                    <th>Cantidad</th>
+                    <th>Precio</th>
+                    <th>Total</th>
+		    <th>Notas</th>
+                </tr>
+            </thead>
+            <tbody id="resumen-tbody">
+                <!-- Rows will be dynamically added here -->
+            </tbody>
+        </table>
+        <div class="total-section" id="resumen-total-section">
+            Total a Pagar: $<span id="resumen-total-amount">0</span>
+        </div>
+    </div>
+   <!-- Checkbox section for order confirmation -->
+    <div class="button">
+        <input type="checkbox" id="confirm-checkbox">
+        <label for="confirm-checkbox">Confirmo que los datos son correctos y estoy listo para comprar.</label>
+    </div>
+
+
+    <!-- Buttons for Buy and Print -->
+    <div class="button">
+        <button class="buy-button" onclick="submitOrder()">Comprar</button>
+        <button class="print-button" onclick="window.print()">Imprimir</button>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>Derechos reservados © 2024 FRESH PRIME.</p>
+    </footer>
+
+   <script>
+    function updateTotal() {
+    let total = 0;
+    const rows = document.querySelectorAll('#product-table tbody tr');
+    const resumenTbody = document.getElementById('resumen-tbody');
+    resumenTbody.innerHTML = ''; // Clear the resumen table
+
+    rows.forEach(row => {
+        const quantityInput = row.querySelector('input[type="number"]');
+        
+        // Change from parseInt to parseFloat to handle decimals
+        let quantity = parseFloat(quantityInput.value) || 0;
+
+        // Prevent negative values
+        if (quantity < 0) {
+            quantity = 0;
+            quantityInput.value = 0; // Reset the input to 0 if negative
+        }
+
+        // Get the price and remove '$' symbol
+        const price = parseFloat(row.querySelector('.price').innerText.replace('$', '').replace(',', '')) || 0;
+
+        // Calculate total for the item (quantity * price)
+        const itemTotal = price * quantity;
+
+        // Update the total for this row in the '.item-total' column
+        row.querySelector('.item-total').innerText = `$${itemTotal.toFixed(2)}`;
+
+        // Capture the notes for the current row
+        const notes = row.querySelector('input[type="text"]').value;
+
+        // If quantity is greater than 0, add it to the "resumen" section
+        if (quantity > 0) {
+            const newRow = resumenTbody.insertRow();
+            newRow.innerHTML = `
+                <td>${row.cells[1].innerText}</td> <!-- Item name -->
+                <td>${quantity}</td> <!-- Quantity -->
+                <td>${row.cells[4].innerText}</td> <!-- Unit price -->
+                <td>$${itemTotal.toFixed(2)}</td> <!-- Total price -->
+                <td>${notes || 'Sin notas'}</td> <!-- Notes -->
+            `;
+        }
+
+        // Accumulate total for all rows
+        total += itemTotal;
+    });
+
+    // Update the total amount in the UI
+    document.getElementById('total-amount').innerText = total.toFixed(2);
+    document.getElementById('resumen-total-amount').innerText = total.toFixed(2);
+
+    // Update the button state after calculating the total
+    toggleBuyButton();
+}
+
+
+
+
+    function toggleBuyButton() {
+        const checkbox = document.getElementById('confirm-checkbox');
+        const buyButton = document.getElementById('buy-button');
+        buyButton.disabled = !checkbox.checked; // Enable button if checkbox is checked
+    }
+
+    function filterTable() {
+        const filter = document.getElementById("class-filter").value;
+        const rows = document.querySelectorAll('#product-table tbody tr');
+
+        rows.forEach(row => {
+            const rowClass = row.getAttribute("data-class");
+            if (filter === "All" || rowClass === filter) {
+                row.style.display = ""; // Show row
+            } else {
+                row.style.display = "none"; // Hide row
+            }
+        });
+    }
+
+    function submitOrder() {
+        const checkbox = document.getElementById('confirm-checkbox');
+        if (checkbox.checked) {
+            alert('Orden enviada exitosamente!');
+            // Implement the order submission logic here
+        } else {
+            alert('Por favor, confirme que los datos son correctos antes de enviar la orden.');
+        }
+    }
+</script>
+
+
+
+</body>
+</html>
+
+
